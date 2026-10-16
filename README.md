@@ -1,35 +1,30 @@
 # Credit Card Checker
 
-A JavaScript program that checks whether credit card numbers are valid using the Luhn algorithm, finds the invalid ones in a batch, and identifies which card companies issued them.
-
-Built as a Codecademy challenge project.
+A Codecademy challenge project from the Full-Stack Engineer path. The setup: a credit card company needs to find out which card numbers in a batch are invalid and which companies issued them. I wrote the JavaScript to do that using the Luhn algorithm, the same checksum real card numbers use.
 
 ## What it does
 
-`validateCred(array)`: returns `true` if a card number passes the Luhn check, `false` if it doesn't. The original array is never changed.
+`validateCred()` runs the Luhn check on a card number and returns true or false. It reads the digits from right to left without changing the original array.
 
-`findInvalidCards(nestedArray)`: checks a batch of cards and returns only the invalid ones.
+`findInvalidCards()` goes through a batch of cards and returns only the ones that fail.
 
-`idInvalidCardCompanies(invalidBatch)`: returns a list of companies (Amex, Visa, Mastercard, Discover) that issued invalid cards, with no duplicates. Prints "Company not found" for unknown first digits.
+`idInvalidCardCompanies()` looks at the first digit of each bad card and returns the companies that issued them (3 is Amex, 4 is Visa, 5 is Mastercard, 6 is Discover), with no duplicates.
 
-`stringToArray(str)`: turns a card number string like `'4242 4242 4242 4242'` into an array of digits, skipping spaces and dashes.
+For the extension, I added `stringToArray()` so you can pass in a card number the way people actually type it, like `'4242 4242 4242 4242'` or with dashes, instead of an array of digits. I tested it with public test card numbers from each company, plus one with a typo to make sure it fails.
 
-## How the Luhn algorithm works
+## How the Luhn check works
 
-1. Start from the last digit (the check digit) and move left.
-2. Double every other digit, starting with the one just left of the check digit. If the result is over 9, subtract 9.
-3. Add up all the digits.
-4. If the total divided by 10 has a remainder of 0, the number is valid.
+Starting from the last digit and moving left, double every second digit. If doubling gives you something over 9, subtract 9. Add everything up. If the total ends in 0, the number is valid.
 
-## Run it
+## Running it
 
-Requires [Node.js](https://nodejs.org).
+You'll need [Node.js](https://nodejs.org/). Then:
 
-```
+```bash
 node main.js
 ```
 
-## Sample output
+Output:
 
 ```
 valid1: true
@@ -45,6 +40,4 @@ Discover: true
 Typo: false
 ```
 
-## Tech
-
-JavaScript (ES6), Node.js
+Built by DeVante Bush
